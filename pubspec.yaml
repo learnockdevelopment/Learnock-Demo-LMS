@@ -1,0 +1,141 @@
+name: webinar
+description: learnock project.
+publish_to: 'none'
+version: 1.0.0
+
+environment:
+  sdk: '>=3.1.5 <4.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flutter_localizations:
+    sdk: flutter
+  intl: any
+
+  flutter_svg: ^2.0.7
+  provider: ^6.1.1
+  dio: ^5.2.1+1
+  persian_number_utility: ^1.1.3
+  file_picker: ^8.0.3
+  shared_preferences: ^2.1.2
+  flutter_native_splash: ^2.3.1
+  loading_indicator: ^3.1.0
+  get_it: ^7.6.0
+  flutter_advanced_drawer: ^1.3.5
+  flutter_rating_bar: ^4.0.1
+  google_sign_in: ^6.2.1
+  url_launcher: ^6.1.12
+  add_2_calendar: ^3.0.1
+  http: ^1.1.2
+  flutter_widget_from_html: ^0.15.0
+  video_player: ^2.8.6
+  share_plus: ^9.0.0
+  permission_handler: ^11.1.0
+  path_provider: ^2.1.0
+  open_file: ^3.3.0
+  flutter_image_compress: ^2.0.4
+  image_picker: ^1.0.7
+  flutter_slidable: ^3.0.0
+  webview_flutter: ^4.4.2
+  pod_player: ^0.2.2
+  flutter_tts: ^4.0.2
+  table_calendar: ^3.0.9
+  confetti: ^0.7.0
+  animated_flip_counter: ^0.3.4
+  fl_chart: ^0.68.0
+  syncfusion_flutter_pdfviewer: ^24.2.8
+  timezone: ^0.9.2
+  flutter_inappwebview: ^6.0.0
+  lottie: ^3.0.0
+  shimmer: ^3.0.0
+  firebase_messaging: ^14.7.19
+  flutter_local_notifications: ^17.0.0
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  connectivity_plus: ^6.0.3
+  cached_network_image: ^3.3.1
+  root_checker_plus: ^0.0.3
+  flutter_windowmanager: ^0.2.0
+  fluttertoast: ^8.2.8
+  flutter_pdfview: ^1.3.4
+  root_check: ^0.0.2+1
+  flutter_barcode_scanner: ^2.0.0
+  uni_links: ^0.5.1
+  firebase_auth: ^4.20.0
+  flutter_secure_storage: ^9.2.2
+  
+dependency_overrides:
+  flutter_widget_from_html_core: ^0.14.9
+  wakelock: 0.6.2
+  win32: ^5.0.2
+  webview_flutter_android: 3.16.1
+  flutter_inappwebview_android:
+    git:
+      url: https://github.com/holzgeist/flutter_inappwebview
+      path: flutter_inappwebview_android
+      ref: d89b1d32638b49dfc58c4b7c84153be0c269d057
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+  flutter_lints: ^4.0.0
+  hive_generator: ^2.0.1
+  build_runner: ^2.4.9
+
+flutter_native_splash:
+  android: true
+  ios: true
+  web: false
+  color: "#df6f0a"
+  color_dark: "#df6f0a"
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+  generate: true
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+
+    - assets/image/flags/
+    - assets/image/png/
+    - assets/image/svg/
+    - assets/image/json/
+    - assets/
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  fonts:
+    - family: Vazir-Bold
+      fonts:
+        - asset: assets/font/vazir-bold.ttf
+    - family: Tajawal-Medium
+      fonts:
+        - asset: assets/font/Tajawal-Medium.ttf
+
+    
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages
