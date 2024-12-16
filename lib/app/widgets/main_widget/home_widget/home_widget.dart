@@ -43,15 +43,6 @@ class HomeWidget {
                       const BorderRadius.vertical(bottom: Radius.circular(28))),
               child: Stack(
                 children: [
-                  PositionedDirectional(
-                      bottom: 0,
-                      child: Directionality(
-                        textDirection: TextDirection.rtl,
-                        child: SvgPicture.asset(
-                          AppAssets.appbarLineSvg,
-                          width: getSize().width,
-                        ),
-                      )),
                   Positioned.fill(
                       child: Padding(
                     padding: padding(),

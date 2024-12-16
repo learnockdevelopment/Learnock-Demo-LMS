@@ -3,16 +3,16 @@ import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:loading_indicator/loading_indicator.dart';
-import 'package:webinar/app/pages/introduction_page/intro_page.dart';
-import 'package:webinar/app/pages/main_page/main_page.dart';
-import 'package:webinar/app/pages/offline_page/internet_connection_page.dart';
-import 'package:webinar/app/services/guest_service/guest_service.dart';
-import 'package:webinar/common/common.dart';
-import 'package:webinar/common/data/app_data.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lottie/lottie.dart';
 import 'package:webinar/common/utils/app_text.dart';
-import 'package:webinar/config/assets.dart';
-import 'package:webinar/config/styles.dart';
+import '../../../common/common.dart';
+import '../../../common/data/app_data.dart';
+import '../../../config/assets.dart';
+import '../../services/guest_service/guest_service.dart';
+import '../main_page/main_page.dart';
+import '../offline_page/internet_connection_page.dart';
+import 'intro_page.dart';
 
 class SplashPage extends StatefulWidget {
   static const String pageName = '/splash';
@@ -22,9 +22,9 @@ class SplashPage extends StatefulWidget {
   State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage>
-    with SingleTickerProviderStateMixin {
+class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   late AnimationController animationController;
+  late AnimationController opacityController; // Ensure this is initialized
 
   @override
   void initState() {
@@ -33,14 +33,23 @@ class _SplashPageState extends State<SplashPage>
     animationController =
         AnimationController(vsync: this, duration: const Duration(seconds: 4));
 
+    opacityController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    );
+
+    opacityController
+      ..repeat(reverse: true);
+
     FlutterNativeSplash.remove();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       animationController.forward();
+      opacityController.forward(); // Start the opacity animation
 
       Timer(const Duration(seconds: 3), () async {
         final List<ConnectivityResult> connectivityResult =
-            await (Connectivity().checkConnectivity());
+        await (Connectivity().checkConnectivity());
 
         if (connectivityResult.contains(ConnectivityResult.none)) {
           nextRoute(InternetConnectionPage.pageName, isClearBackRoutes: true);
@@ -70,61 +79,36 @@ class _SplashPageState extends State<SplashPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFffffff),
       body: Container(
-        width: getSize().width,
-        height: getSize().height,
-
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+            color: Color(0xFFffffff),
+        ),
+        child: Stack(
+          alignment: Alignment.center,
           children: [
-            const Spacer(),
-            const Spacer(),
-            const SizedBox(height: 150),
+            Lottie.asset(
+              'assets/lottie.json',
+              width: 300,
+              height: 300,
+              fit: BoxFit.contain,
+            ),
+            space(60),
 
-            Stack(
-              alignment: Alignment.center,
-              children: [
-                Center(
-                  child: AnimatedBuilder(
-                    animation: animationController,
-                    builder: (context, child) {
-                      return Transform.scale(
-                        scale: 1 + (1 * animationController.value), // Smaller pulse range for smoother effect
-                        child: Opacity(
-                          opacity: animationController.value, // Gradual appearance (step-by-step)
-                          child: Image.asset(
-                            AppAssets.logoPng,
-                            width: 100,
-                            height: 100,
-                          ),
-                        ),
-                      );
-                    },
+            Positioned(
+              bottom: 30,
+              child: Column(
+                children: [
+                  const SizedBox(height: 5),
+                  Image.asset(
+                    AppAssets.logoPng,  // Your logo image
+                    width: 150,
+                    height: 150,
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 70),
-            Text(
-              appText.webinar,
-              style: style24Bold().copyWith(color: Color(0xFF2e71b8)),
-            ),
-            const SizedBox(height: 10),
-
-            const Spacer(),
-            const Spacer(),
-            const SizedBox(
-              width: 35,
-              child: LoadingIndicator(
-                indicatorType: Indicator.ballBeat,
-                colors: [Colors.white],
-                strokeWidth: 100,
-                backgroundColor: Colors.transparent,
-                pathBackgroundColor: Colors.transparent,
+                ],
               ),
             ),
-            const Spacer(),
           ],
         ),
       ),
@@ -134,6 +118,7 @@ class _SplashPageState extends State<SplashPage>
   @override
   void dispose() {
     animationController.dispose();
+    opacityController.dispose(); // Dispose opacityController as well
     super.dispose();
   }
 }

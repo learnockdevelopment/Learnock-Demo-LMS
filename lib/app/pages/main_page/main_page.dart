@@ -164,8 +164,6 @@ class _MainPageState extends State<MainPage> {
                 controller: drawerController,
                 
                 childDecoration: BoxDecoration(
-                  // borderRadius: Platform.isIOS ? borderRadius() : const BorderRadius.vertical(top: Radius.circular(21)),
-                  // borderRadius: kIsWeb ? null : borderRadius(radius: isOpen ? 20 : 0),
                   color: Colors.transparent,
                   boxShadow: [
                     BoxShadow(
@@ -197,99 +195,89 @@ class _MainPageState extends State<MainPage> {
 
                       space(60),
 
-                      Image.asset(AppAssets.worldPng,width: getSize().width * .8, fit: BoxFit.cover,),
                     ],
                   ),
                 ),
-      
-                child: Consumer<PageProvider>(
-                  builder: (context, pageProvider, _) {
-                    return SafeArea(
-                      bottom: !kIsWeb && Platform.isAndroid,
-                      top: false,
-                      child: Scaffold(
-                        backgroundColor: Colors.transparent,
-                        resizeToAvoidBottomInset: false,
-                        extendBody: true,
-      
-                        body: pageProvider.pages[pageProvider.page],
-                    
-      
-                        bottomNavigationBar: Directionality(
-                          textDirection: TextDirection.ltr,
-                          child: Consumer<DrawerProvider>(
-                            builder: (context, drawerProvider, _) {
-                              return Stack(
-                                children: [
-                                  
-                                  // background
-                                  Positioned.fill(
-                                    bottom: 0,
-                                    top: getSize().height - bottomNavHeight,
-                                    child: ClipRRect(
+
+                  child: Consumer<PageProvider>(
+                      builder: (context, pageProvider, _) {
+                        return SafeArea(
+                          bottom: !kIsWeb && Platform.isAndroid,
+                          top: false,
+                          child: Scaffold(
+                            backgroundColor: Colors.transparent,
+                            resizeToAvoidBottomInset: false,
+                            extendBody: true,
+
+                            body: pageProvider.pages[pageProvider.page],  // Main body content
+                            bottomNavigationBar: Directionality(
+                              textDirection: TextDirection.ltr,
+                              child: Consumer<DrawerProvider>(
+                                builder: (context, drawerProvider, _) {
+                                  return Container(
+                                    height: 80,
+                                    decoration: BoxDecoration(
+                                      color: green77(),
                                       borderRadius: BorderRadius.vertical(
-                                        bottom: drawerProvider.isOpenDrawer ? const Radius.circular(kIsWeb ? 0 : 20) : Radius.zero
+                                        top: Radius.circular(30),
                                       ),
-                                      child: ClipPath(
-                                        clipper: BottomNavClipper(),
-                                                                      
-                                        child: Container(
-                                          width: getSize().width,
-                                          height: bottomNavHeight,
-                                          decoration: BoxDecoration(
-                                            gradient: LinearGradient(
-                                              colors: [
-                                                green77(),
-                                                Color(0xff2e71b8)
-                                              ],
-                                              begin: Alignment.topLeft,
-                                              end: Alignment.bottomRight
-                                            )
-                                          ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.2),
+                                          blurRadius: 10,
+                                          offset: Offset(0, -2),  // Shadow above the navbar
                                         ),
-                                                                      
-                                                                      
-                                      ),
-                                    ),
-                                  ),
-                                                
-                                  Positioned.fill(
-                                    bottom: 0,
-                                    top: getSize().height - bottomNavHeight,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        
-                                        MainWidget.navItem(PageNames.categories, pageProvider.page, appText.categories, AppAssets.categorySvg, (){
-                                          pageProvider.setPage(PageNames.categories);
-                                        }),
-                                        
-                                        MainWidget.navItem(PageNames.providers, pageProvider.page, appText.providers, AppAssets.provideresSvg, (){
-                                          pageProvider.setPage(PageNames.providers);
-                                        }),
-                                                
-                                                
-                                        MainWidget.homeNavItem(PageNames.home, pageProvider.page, (){
-                                          pageProvider.setPage(PageNames.home);
-                                        }),
-                                        
-                                        
-                                        MainWidget.navItem(PageNames.blog, pageProvider.page, appText.blog, AppAssets.blogSvg, (){
-                                          pageProvider.setPage(PageNames.blog);
-                                        }),
-                                        
-                                        MainWidget.navItem(PageNames.myClasses, pageProvider.page, appText.myClassess, AppAssets.classesSvg, (){
-                                          pageProvider.setPage(PageNames.myClasses);
-                                        }),
-                                                
                                       ],
-                                    )
-                                  )
-                                ],
-                              );
-                            }
-                          ),
-                        ),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        MainWidget.navItem(
+                                          PageNames.categories,
+                                          pageProvider.page,
+                                          appText.categories,
+                                          AppAssets.categorySvg, () {
+                                          pageProvider.setPage(PageNames.categories);
+                                        },
+                                        ),
+                                        MainWidget.navItem(
+                                          PageNames.providers,
+                                          pageProvider.page,
+                                          appText.providers,
+                                          AppAssets.provideresSvg, () {
+                                          pageProvider.setPage(PageNames.providers);
+                                        },
+                                        ),
+                                        MainWidget.navItem(
+                                          PageNames.home,
+                                          pageProvider.page,
+                                          appText.home,
+                                          AppAssets.homeSvg, () {
+                                          pageProvider.setPage(PageNames.home);
+                                        },
+                                        ),
+                                        MainWidget.navItem(
+                                          PageNames.blog,
+                                          pageProvider.page,
+                                          appText.blog,
+                                          AppAssets.blogSvg, () {
+                                          pageProvider.setPage(PageNames.blog);
+                                        },
+                                        ),
+                                        MainWidget.navItem(
+                                          PageNames.myClasses,
+                                          pageProvider.page,
+                                          appText.myClassess,
+                                          AppAssets.classesSvg, () {
+                                          pageProvider.setPage(PageNames.myClasses);
+                                        },
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
                     
                       ),
                     );

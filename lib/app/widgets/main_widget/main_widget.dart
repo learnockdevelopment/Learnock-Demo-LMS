@@ -477,43 +477,11 @@ class MainWidget{
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-
-
-            Stack(
-              children: [
-
-                Center(child: SvgPicture.asset(AppAssets.homeNavSvg, colorFilter:  ColorFilter.mode(Color(0xff548ac8), BlendMode.srcIn),)),
-
-                Positioned(
-                    bottom: 4,
-                    top: 0,
-                    right: 0,
-                    left: 0,
-                    child: Center(child: SvgPicture.asset(AppAssets.homeSvg, colorFilter:  const ColorFilter.mode(Colors.white, BlendMode.srcIn), width: 20))
-                ),
-              ],
-            ),
-
             space(10),
-
             AnimatedOpacity(
               duration: const Duration(milliseconds: 300),
               opacity: 1,
-              child: Text(
-                appText.home,
-                style: style10Regular().copyWith(color: Colors.white),
-              ),
             ),
-
-            space(8),
-
-            AnimatedCrossFade(
-              firstChild: SvgPicture.asset(AppAssets.navArrowSvg),
-              secondChild: const SizedBox(height: 5,),
-              crossFadeState: thisPage == selectedPage ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-              duration: const Duration(milliseconds: 300),
-            )
-
           ],
         ),
       ),
